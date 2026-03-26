@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notice App</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background:#f3f5f9;
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    align-items:center;
+    background:#fff;
+    padding:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    margin-right:10px;
+}
+
+.school-name{
+    font-size:18px;
+    font-weight:bold;
+}
+
+/* SELECT */
+.select-box{
+    padding:15px;
+}
+
+select{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
+
+/* POSTS */
+.container{
+    padding:12px;
+}
+
+.post{
+    background:#fff;
+    border-radius:15px;
+    margin-bottom:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    display:none;
+}
+
+/* USER */
+.user{
+    display:flex;
+    align-items:center;
+    padding:12px;
+}
+
+.user img{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    margin-right:10px;
+}
+
+.user-id{
+    font-weight:600;
+}
+
+/* IMAGE */
+.post-img{
+    width:100%;
+    cursor:pointer;
+}
+
+/* TEXT */
+.text-only{
+    padding:15px;
+    font-size:15px;
+}
+
+/* LOADER */
+.loader-bg{
+    display:none;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(5px);
+    z-index:999;
+}
+
+.loader{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    border:6px solid #ddd;
+    border-top:6px solid #007bff;
+    border-radius:50%;
+    width:55px;
+    height:55px;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    100%{transform:translate(-50%,-50%) rotate(360deg);}
+}
+
+/* FULL IMAGE VIEW */
+#fullImageView{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.95);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    animation:fadeIn .3s;
+}
+
+#fullImageView img{
+    width:90%;
+    max-height:90%;
+    border-radius:12px;
+    animation:zoom .3s ease;
+}
+
+/* PREMIUM CLOSE BUTTON */
+.close-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    border:none;
+    border-radius:50%;
+    width:45px;
+    height:45px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    color:#fff;
+    cursor:pointer;
+    box-shadow:0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+@keyframes zoom{
+    from{transform:scale(0.8);}
+    to{transform:scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <img src="logo.png" class="logo">
+    <div class="school-name">Class Notice</div>
+</div>
+
+<!-- SELECT -->
+<div class="select-box">
+    <select onchange="filterPost(this.value)">
+        <option value="">Select Class</option>
+        <option value="10">Class 10</option>
+        <option value="9">Class 9</option>
+        <option value="8">Class 8</option>
+    </select>
+</div>
+
+<!-- POSTS -->
+<div class="container">
+
+<!-- IMAGE + TEXT -->
+<div class="post" data-class="class 10">
+    <div class="user">
+        <img src="10th.png">
+        <div class="user-id">Class 10th</div>
+    </div>
+
+    <!-- IMPORTANT IMAGE CODE -->
+    <img src="logo.png" class="post-img" onclick="openImage(this.src)">
+
+    <div class="text-only">📢 Cless 10th 👉 New App Lunch For New Notice Wait ☺️</div>
+</div>
+
+<!-- TEXT ONLY -->
+<div class="post" data-class="9">
+    <div class="user">
+        <img src="9th.png">
+        <div class="user-id">Cless 9th</div>
+    </div>
+
+    <div class="text-only">📢 Class 9th 👉 New App Lunch For Wait New Notice</div>
+</div>
+<!-- TEXT ONLY -->
+<div class="post" data-class="8">
+    <div class="user">
+        <img src="8th.png">
+        <div class="user-id">Cless 8th</div>
+    </div>
+
+    <div class="text-only">📢 Class 8th 👉 New App Lunch For Wait New Notice</div>
+</div>
+
+</div>
+
+<!-- LOADER -->
+<div class="loader-bg" id="loader">
+    <div class="loader"></div>
+</div>
+
+<!-- FULL IMAGE VIEW -->
+<div id="fullImageView">
+    <button class="close-btn" onclick="closeImage()">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img id="fullImg">
+</div>
+
+<script>
+
+/* FILTER SYSTEM */
+function filterPost(cls){
+
+    let loader = document.getElementById("loader");
+    loader.style.display = "block";
+
+    setTimeout(()=>{
+
+        let posts = document.querySelectorAll(".post");
+
+        posts.forEach(post=>{
+            let data = post.getAttribute("data-class").toLowerCase();
+
+            if(data.includes(cls)){
+                post.style.display = "block";
+            } else {
+                post.style.display = "none";
+            }
+        });
+
+        loader.style.display = "none";
+
+    },1000);
+}
+
+/* IMAGE OPEN */
+function openImage(src){
+    document.getElementById("fullImageView").style.display="flex";
+    document.getElementById("fullImg").src=src;
+}
+
+/* IMAGE CLOSE */
+function closeImage(){
+    document.getElementById("fullImageView").style.display="none";
+}
+
+/* CLICK OUTSIDE CLOSE */
+document.getElementById("fullImageView").addEventListener("click",function(e){
+    if(e.target.id==="fullImageView"){
+        closeImage();
+    }
+});
+
+</script>
+
+</body>
+</html>

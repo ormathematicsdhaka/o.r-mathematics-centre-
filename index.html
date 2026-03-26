@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loading</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    overflow:hidden;
+    background:linear-gradient(135deg,#f5f7fa,#e4ecff);
+}
+
+/* SECTION */
+.section{
+    display:none;
+    text-align:center;
+    animation:fade 1s ease;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:scale(0.95);}
+    to{opacity:1; transform:scale(1);}
+}
+
+/* LOGO */
+.logo img{
+    width:170px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    animation:zoom 2s infinite alternate;
+}
+
+@keyframes zoom{
+    from{transform:scale(1);}
+    to{transform:scale(1.05);}
+}
+
+/* IMAGE */
+#image2 img{
+    max-width:85%;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* TYPING TEXT */
+.typing{
+    font-size:26px;
+    font-weight:bold;
+    color:#0a0a0a;
+    border-right:3px solid black;
+    white-space:nowrap;
+    overflow:hidden;
+    display:inline-block;
+    padding-right:5px;
+}
+
+/* BLINK CURSOR */
+.typing::after{
+    content:"";
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    0%{opacity:1;}
+    50%{opacity:0;}
+    100%{opacity:1;}
+}
+
+/* LOADING DOTS */
+.dots{
+    margin-top:10px;
+    font-size:14px;
+    color:#555;
+    animation:dot 1.5s infinite;
+}
+
+@keyframes dot{
+    0%{content:"";}
+    50%{content:"..";}
+    100%{content:"...";}
+}
+
+/* RESPONSIVE */
+@media(min-width:768px){
+    .typing{
+        font-size:40px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGO -->
+<div class="section logo" id="logo">
+    <img src="logo.png">
+</div>
+
+<!-- SECOND IMAGE -->
+<div class="section" id="image2">
+    <img src="o1.png">
+</div>
+
+<!-- TEXT -->
+<div class="section" id="text">
+    <h1 class="typing" id="typing"></h1>
+    <div class="dots">Loading...</div>
+</div>
+
+<script>
+
+const text = "O.R MATHEMATICS CENTRE";
+let i = 0;
+
+/* TYPING EFFECT */
+function type(){
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 70);
+    }
+}
+
+/* SHOW LOGO */
+document.getElementById("logo").style.display = "block";
+
+/* STEP 2 */
+setTimeout(()=>{
+    document.getElementById("logo").style.display="none";
+    document.getElementById("image2").style.display="block";
+},5000);
+
+/* STEP 3 */
+setTimeout(()=>{
+    document.getElementById("image2").style.display="none";
+    document.getElementById("text").style.display="block";
+    type();
+},10000);
+
+/* REDIRECT */
+setTimeout(()=>{
+    window.location.href="home.html";
+},15000);
+
+</script>
+
+</body>
+</html>

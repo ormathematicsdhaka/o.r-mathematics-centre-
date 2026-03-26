@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
+}
+
+/* BODY */
+
+body{
+background:#fff;
+color:#111;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+align-items:center;
+padding:12px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+position:sticky;
+top:0;
+background:#fff;
+z-index:100;
+}
+
+.header img{
+width:40px;
+height:40px;
+border-radius:50%;
+margin-right:10px;
+}
+
+.header h2{
+font-size:18px;
+}
+
+/* GALLERY */
+
+.gallery{
+padding:10px;
+}
+
+/* CARD */
+
+.card{
+margin-bottom:15px;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* IMAGE */
+
+.card img{
+width:100%;
+height:auto;
+display:block;
+}
+
+/* TEXT */
+
+.card p{
+padding:10px;
+font-size:14px;
+}
+
+/* FULLSCREEN */
+
+.fullscreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.fullscreen img{
+width:100%;
+height:auto;
+}
+
+.close{
+position:absolute;
+top:20px;
+right:20px;
+font-size:30px;
+color:white;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+<img src="logo.png">
+<h2>O.R MATHEMATICS CENTER</h2>
+</div>
+
+<!-- GALLERY -->
+
+<div class="gallery">
+
+<!-- 20 POSTS -->
+
+<div class="card">
+<img src="1.png" onclick="openFull(this.src)">
+<p>O.R MATHEMATICS CENTER</p>
+</div>
+
+<div class="card">
+<img src="images/photo2.jpg" onclick="openFull(this.src)">
+<p>Post 2</p>
+</div>
+
+<div class="card">
+<img src="images/photo3.jpg" onclick="openFull(this.src)">
+<p>Post 3</p>
+</div>
+
+<div class="card">
+<img src="images/photo4.jpg" onclick="openFull(this.src)">
+<p>Post 4</p>
+</div>
+
+<div class="card">
+<img src="images/photo5.jpg" onclick="openFull(this.src)">
+<p>Post 5</p>
+</div>
+
+<div class="card">
+<img src="images/photo6.jpg" onclick="openFull(this.src)">
+<p>Post 6</p>
+</div>
+
+<div class="card">
+<img src="images/photo7.jpg" onclick="openFull(this.src)">
+<p>Post 7</p>
+</div>
+
+<div class="card">
+<img src="images/photo8.jpg" onclick="openFull(this.src)">
+<p>Post 8</p>
+</div>
+
+<div class="card">
+<img src="images/photo9.jpg" onclick="openFull(this.src)">
+<p>Post 9</p>
+</div>
+
+<div class="card">
+<img src="images/photo10.jpg" onclick="openFull(this.src)">
+<p>Post 10</p>
+</div>
+
+<div class="card">
+<img src="images/photo11.jpg" onclick="openFull(this.src)">
+<p>Post 11</p>
+</div>
+
+<div class="card">
+<img src="images/photo12.jpg" onclick="openFull(this.src)">
+<p>Post 12</p>
+</div>
+
+<div class="card">
+<img src="images/photo13.jpg" onclick="openFull(this.src)">
+<p>Post 13</p>
+</div>
+
+<div class="card">
+<img src="images/photo14.jpg" onclick="openFull(this.src)">
+<p>Post 14</p>
+</div>
+
+<div class="card">
+<img src="images/photo15.jpg" onclick="openFull(this.src)">
+<p>Post 15</p>
+</div>
+
+<div class="card">
+<img src="images/photo16.jpg" onclick="openFull(this.src)">
+<p>Post 16</p>
+</div>
+
+<div class="card">
+<img src="images/photo17.jpg" onclick="openFull(this.src)">
+<p>Post 17</p>
+</div>
+
+<div class="card">
+<img src="images/photo18.jpg" onclick="openFull(this.src)">
+<p>Post 18</p>
+</div>
+
+<div class="card">
+<img src="images/photo19.jpg" onclick="openFull(this.src)">
+<p>Post 19</p>
+</div>
+
+<div class="card">
+<img src="images/photo20.jpg" onclick="openFull(this.src)">
+<p>Post 20</p>
+</div>
+
+</div>
+
+<!-- FULLSCREEN VIEW -->
+
+<div class="fullscreen" id="fullscreen">
+<span class="close" onclick="closeFull()">×</span>
+<img id="fullImg">
+</div>
+
+<script>
+
+/* SWAP SYSTEM (TOP → BOTTOM EVERY 20 SEC) */
+
+let gallery = document.querySelector(".gallery");
+
+setInterval(function(){
+
+let first = gallery.children[0];
+gallery.appendChild(first);
+
+},20000);
+
+/* FULLSCREEN */
+
+function openFull(src){
+document.getElementById("fullscreen").style.display="flex";
+document.getElementById("fullImg").src=src;
+}
+
+function closeFull(){
+document.getElementById("fullscreen").style.display="none";
+}
+
+</script>
+
+</body>
+</html>

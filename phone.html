@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact</title>
+
+<!-- FONT AWESOME (REAL ICONS) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+}
+
+/* HEADER */
+.top-circle {
+    background: linear-gradient(#000000, #ffffff, #000000);
+    height: 160px;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logo {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+    padding: 5px;
+}
+
+.circle-text {
+    color: white;
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* CARD */
+.container {
+    padding: 12px;
+}
+
+.card {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.info {
+    flex: 1;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.role {
+    font-size: 13px;
+    color: gray;
+}
+
+.phone {
+    margin-top: 5px;
+    color: #007bff;
+    text-decoration: none;
+    display: block;
+}
+
+/* BUTTONS */
+.buttons {
+    margin-top: 6px;
+}
+
+.btn {
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    text-decoration: none;
+    color: white;
+    margin-right: 5px;
+}
+
+.call {
+    background: #28a745;
+}
+
+.whatsapp {
+    background: #25D366;
+}
+
+/* IMAGE */
+.big-img {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+/* MAP */
+.map {
+    width: 100%;
+    height: 220px;
+    margin-top: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* SOCIAL ICONS */
+.social {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.social a {
+    font-size: 22px;
+    color: #333;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.social a:hover {
+    transform: scale(1.2);
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 400px) {
+    .name {
+        font-size: 14px;
+    }
+    .card img {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="top-circle">
+    <img src="logo.png" class="logo">
+    <div class="circle-text">Contact Page</div>
+</div>
+
+<div class="container">
+
+    <!-- PRINCIPAL -->
+    <div class="card">
+        <img src="teacher.png">
+        <div class="info">
+            <div class="name">Obaidur Rahman</div>
+            <div class="role">Director</div>
+            <a href="tel:9279600933" class="phone">
+                <i class="fa-solid fa-phone"></i> 9279600933
+            </a>
+
+            <div class="buttons">
+                <a href="tel:9279600933" class="btn call">
+                    <i class="fa-solid fa-phone"></i> Call
+                </a>
+                <a href="https://wa.me/927600933" class="btn whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- BIG IMAGE -->
+    <img src="1.png" class="big-img">
+
+    <!-- MAP -->
+    <div class="map">
+        <iframe 
+        src="https://maps.google.com/maps?q=Azad%20Chowk%20Dhaka%20Bihar&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+
+    <!-- SOCIAL ICONS -->
+    <div class="social">
+        <a href="https://instagram.com" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank">
+            <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://wa.me/" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="https://google.com" target="_blank">
+            <i class="fa-brands fa-google"></i>
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
